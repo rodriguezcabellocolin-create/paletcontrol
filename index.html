@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaletControl · Inventario</title>
+<style>
+:root{--bg:#f3f5f8;--panel:#fff;--ink:#172033;--muted:#687386;--line:#e3e8ef;--blue:#2457d6;--blue2:#eaf0ff;--green:#16845b;--orange:#b86a12;--red:#c23b45;--shadow:0 8px 24px rgba(25,39,66,.06)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:650}.primary{background:var(--blue);color:#fff}.secondary{background:#eef1f6;color:#253149}.danger{background:#fff0f0;color:var(--red)}.small{padding:6px 9px;font-size:12px}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{background:#15213a;color:#fff;padding:26px 18px;display:flex;flex-direction:column;gap:25px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:-.4px}.logo{display:grid;place-items:center;background:#2f63e5;width:38px;height:38px;border-radius:12px;font-size:21px}.subbrand{font-size:12px;color:#aab6ce;margin:5px 0 0 49px}.navlabel{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#8290aa;margin:0 0 8px 10px}.nav button{width:100%;text-align:left;background:transparent;color:#c4cee0;margin:3px 0;padding:12px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#263654;color:white}.side-note{margin-top:auto;border:1px solid #34425e;border-radius:14px;padding:14px;font-size:12px;color:#bdc8dc;line-height:1.5}.side-note strong{color:#fff;display:block;margin-bottom:5px}.main{min-width:0;padding:28px 32px 40px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:26px}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px}.top h1{font-size:28px;letter-spacing:-.8px;margin:5px 0}.top p{color:var(--muted);margin:0;font-size:14px}.actions{display:flex;gap:9px;flex-wrap:wrap}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:22px}.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.card{padding:19px}.card-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}.card-icon{width:34px;height:34px;border-radius:10px;background:var(--blue2);display:grid;place-items:center;font-size:17px}.metric{font-size:29px;font-weight:800;letter-spacing:-1px;margin:13px 0 4px}.hint{font-size:12px;color:var(--muted)}.content-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:18px;margin-bottom:18px}.panel{padding:20px;min-width:0}.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:17px}.panel h2{font-size:16px;margin:0;letter-spacing:-.2px}.panel-head p{margin:5px 0 0;color:var(--muted);font-size:12px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}.field{width:100%;border:1px solid #dce2eb;background:#fff;border-radius:9px;padding:10px 11px;color:var(--ink);outline:none}.field:focus{border-color:#7295f2;box-shadow:0 0 0 3px #eaf0ff}.filters .field{width:auto;min-width:140px;flex:1}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px;white-space:nowrap}th{text-align:left;color:#778195;font-weight:650;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:11px 10px;border-bottom:1px solid var(--line)}td{padding:13px 10px;border-bottom:1px solid #edf0f4}tr:last-child td{border-bottom:0}.badge{display:inline-flex;align-items:center;border-radius:20px;padding:5px 8px;font-size:11px;font-weight:750;background:#edf8f2;color:var(--green)}.badge.low{background:#fff3e6;color:var(--orange)}.badge.empty{background:#fceced;color:var(--red)}.warehouse-list{display:flex;flex-direction:column;gap:10px}.warehouse{border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;align-items:center;gap:12px}.wh-icon{width:40px;height:40px;border-radius:11px;background:#f0f3f9;display:grid;place-items:center;font-size:20px}.wh-main{flex:1;min-width:0}.wh-main strong{display:block;font-size:13px}.wh-main span{font-size:11px;color:var(--muted)}.wh-count{text-align:right;font-weight:800;font-size:15px}.wh-count small{display:block;color:var(--muted);font-size:10px;font-weight:500}.activity{display:flex;flex-direction:column;gap:0}.event{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #edf0f4}.event:last-child{border:0}.event-dot{width:9px;height:9px;background:#4675e8;border-radius:50%;margin-top:5px;flex:none}.event-text{font-size:12px;line-height:1.5}.event-text strong{font-size:12px}.event-text small{display:block;color:var(--muted);margin-top:2px}.empty-state{padding:28px 10px;text-align:center;color:var(--muted);font-size:13px}.section{display:none}.section.active{display:block}.notice{padding:12px 14px;background:#edf3ff;border-radius:10px;color:#3153a0;font-size:12px;margin-bottom:16px;line-height:1.5}.modal-backdrop{position:fixed;inset:0;background:rgba(15,24,42,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.show{display:flex}.modal{background:#fff;border-radius:18px;width:min(560px,100%);max-height:90vh;overflow:auto;padding:24px;box-shadow:0 25px 80px #101a2b44}.modal h2{margin:0 0 6px;font-size:20px}.modal p{margin:0 0 20px;color:var(--muted);font-size:13px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-row{display:flex;flex-direction:column;gap:6px}.form-row.full{grid-column:1/-1}.form-row label{font-size:12px;font-weight:700;color:#4b566a}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.toast{position:fixed;right:22px;bottom:22px;background:#17233b;color:#fff;padding:13px 17px;border-radius:11px;box-shadow:var(--shadow);display:none;z-index:20;font-size:13px}.mobile-menu{display:none}
+@media(max-width:1050px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:1fr}.app{grid-template-columns:210px 1fr}.main{padding:24px}}
+@media(max-width:700px){.app{display:block}.side{display:none}.main{padding:19px 14px}.top{align-items:flex-start;flex-direction:column}.top h1{font-size:24px}.cards{gap:10px}.card{padding:14px}.metric{font-size:24px}.panel{padding:15px}.form-grid{grid-template-columns:1fr}.form-row.full{grid-column:auto}.actions{width:100%}.actions button{flex:1}.cards .hint{line-height:1.4}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div><div class="brand"><div class="logo">▤</div>PaletControl</div><div class="subbrand">Inventario y almacenes</div></div>
+  <div class="nav"><div class="navlabel">GESTIÓN</div>
+    <button class="active" data-page="dashboard">▦ &nbsp; Resumen</button>
+    <button data-page="stock">▤ &nbsp; Inventario de palets</button>
+    <button data-page="warehouses">⌂ &nbsp; Naves y ubicaciones</button>
+    <button data-page="movements">⇄ &nbsp; Movimientos</button>
+  </div>
+  <div class="side-note"><strong>📦 Control de stock</strong>Registra entradas, salidas y traslados entre naves desde un solo lugar.<br><br>Los datos se guardan en este dispositivo.</div>
+</aside>
+<main class="main">
+  <section class="section active" id="page-dashboard">
+    <div class="top"><div><div class="eyebrow">Panel de control</div><h1>Resumen de inventario</h1><p>Vista general de tus palets y todas tus naves.</p></div><div class="actions"><button class="secondary" id="exportBtn">↓ Exportar CSV</button><button class="primary" id="quickMovement">＋ Registrar movimiento</button></div></div>
+    <div class="cards">
+      <div class="card"><div class="card-head">Palets en stock <span class="card-icon">▤</span></div><div class="metric" id="totalStock">0</div><div class="hint">Unidades en todas las naves</div></div>
+      <div class="card"><div class="card-head">Naves activas <span class="card-icon">⌂</span></div><div class="metric" id="totalWarehouses">0</div><div class="hint">Ubicaciones registradas</div></div>
+      <div class="card"><div class="card-head">Tipos de palet <span class="card-icon">▦</span></div><div class="metric" id="totalTypes">0</div><div class="hint">Referencias diferentes</div></div>
+      <div class="card"><div class="card-head">Stock bajo <span class="card-icon">⚑</span></div><div class="metric" id="lowStock">0</div><div class="hint">Referencias con 10 unidades o menos por nave</div></div>
+    </div>
+    <div class="content-grid">
+      <div class="panel"><div class="panel-head"><div><h2>Stock por nave</h2><p>Unidades disponibles en cada ubicación</p></div><button class="secondary small" data-goto="warehouses">Ver naves</button></div><div id="dashboardWarehouses" class="warehouse-list"></div></div>
+      <div class="panel"><div class="panel-head"><div><h2>Últimos movimientos</h2><p>Actividad reciente de inventario</p></div><button class="secondary small" data-goto="movements">Ver todos</button></div><div id="dashboardActivity" class="activity"></div></div>
+    </div>
+    <div class="panel"><div class="panel-head"><div><h2>Stock por referencia</h2><p>Resumen de palets agrupados por tipo</p></div><button class="secondary small" data-goto="stock">Gestionar stock</button></div><div id="dashboardStock" class="table-wrap"></div></div>
+  </section>
+
+  <section class="section" id="page-stock">
+    <div class="top"><div><div class="eyebrow">Existencias</div><h1>Inventario de palets</h1><p>Consulta y ajusta las cantidades por nave y tipo.</p></div><div class="actions"><button class="secondary" id="stockExport">↓ Exportar CSV</button><button class="primary" id="addStock">＋ Añadir stock</button></div></div>
+    <div class="notice">Cada registro representa una referencia de palet dentro de una nave. Para descontar unidades o mover palets a otra nave, usa «Registrar movimiento».</div>
+    <div class="panel"><div class="filters"><input class="field" id="stockSearch" placeholder="Buscar tipo, código o nave…"><select class="field" id="stockWarehouseFilter"><option value="">Todas las naves</option></select><select class="field" id="stockTypeFilter"><option value="">Todos los tipos</option></select></div><div class="table-wrap" id="stockTable"></div></div>
+  </section>
+
+  <section class="section" id="page-warehouses">
+    <div class="top"><div><div class="eyebrow">Ubicaciones</div><h1>Naves y almacenes</h1><p>Administra todas tus naves y consulta su capacidad de stock.</p></div><div class="actions"><button class="primary" id="addWarehouse">＋ Añadir nave</button></div></div>
+    <div class="notice">Puedes crear tantas naves como necesites. El inventario de cada nave se mantiene separado para facilitar los recuentos y traslados.</div>
+    <div class="panel"><div class="panel-head"><div><h2>Todas las naves</h2><p id="warehouseCountLabel">0 ubicaciones</p></div></div><div class="table-wrap" id="warehouseTable"></div></div>
+  </section>
+
+  <section class="section" id="page-movements">
+    <div class="top"><div><div class="eyebrow">Trazabilidad</div><h1>Movimientos</h1><p>Entradas, salidas y traslados con historial de operaciones.</p></div><div class="actions"><button class="primary" id="addMovement">＋ Registrar movimiento</button></div></div>
+    <div class="panel"><div class="filters"><input class="field" id="movementSearch" placeholder="Buscar referencia, nave o nota…"><select class="field" id="movementKindFilter"><option value="">Todos los movimientos</option><option>Entrada</option><option>Salida</option><option>Traslado</option><option>Ajuste</option></select></div><div class="table-wrap" id="movementTable"></div></div>
+  </section>
+</main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal"><h2 id="modalTitle">Añadir</h2><p id="modalDescription"></p><form id="modalForm"><div class="form-grid" id="modalFields"></div><div class="modal-actions"><button type="button" class="secondary" id="cancelModal">Cancelar</button><button class="primary" type="submit" id="saveModal">Guardar</button></div></form></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='paletcontrol_v1';
+const initial={warehouses:[{id:'wh1',name:'Nave principal',code:'N-01',location:'',capacity:0},{id:'wh2',name:'Nave secundaria',code:'N-02',location:'',capacity:0}],types:[{id:'t1',name:'Europalet 120×80',code:'EUR-12080',description:'Europalet estándar'},{id:'t2',name:'Palet americano 120×100',code:'USA-120100',description:'Formato americano'}],stock:[{id:'s1',warehouseId:'wh1',typeId:'t1',qty:320,notes:''},{id:'s2',warehouseId:'wh1',typeId:'t2',qty:85,notes:''},{id:'s3',warehouseId:'wh2',typeId:'t1',qty:140,notes:''}],movements:[]};
+let db; try{db=JSON.parse(localStorage.getItem(KEY))||structuredClone(initial)}catch(e){db=structuredClone(initial)}
+let modalAction=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=prefix=>prefix+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const whName=id=>db.warehouses.find(w=>w.id===id)?.name||'Nave eliminada';
+const typeName=id=>db.types.find(t=>t.id===id)?.name||'Tipo eliminado';
+const typeCode=id=>db.types.find(t=>t.id===id)?.code||'—';
+const total=arr=>arr.reduce((a,b)=>a+(Number(b.qty)||0),0);
+function save(){localStorage.setItem(KEY,JSON.stringify(db));render();} 
+function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2600)}
+function nav(page){document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id==='page-'+page));render()}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.page)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.goto)));
+function badge(q){return q===0?'<span class="badge empty">Sin stock</span>':q<=10?'<span class="badge low">Stock bajo</span>':'<span class="badge">Disponible</span>'}
+function table(headers,rows,empty='No hay registros todavía.'){return rows.length?`<table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>`:`<div class="empty-state">${empty}</div>`}
+function render(){
+ const stockTotal=total(db.stock), whs=db.warehouses.length, types=new Set(db.stock.map(s=>s.typeId)).size, low=db.stock.filter(s=>s.qty<=10).length;
+ $('totalStock').textContent=stockTotal.toLocaleString('es-ES');$('totalWarehouses').textContent=whs;$('totalTypes').textContent=types;$('lowStock').textContent=low;
+ $('dashboardWarehouses').innerHTML=db.warehouses.length?db.warehouses.map(w=>{let q=total(db.stock.filter(s=>s.warehouseId===w.id));return `<div class="warehouse"><div class="wh-icon">⌂</div><div class="wh-main"><strong>${esc(w.name)}</strong><span>${esc(w.code||'Sin código')}${w.location?' · '+esc(w.location):''}</span></div><div class="wh-count">${q.toLocaleString('es-ES')}<small>palets</small></div></div>`}).join(''):'<div class="empty-state">Añade tu primera nave.</div>';
+ $('dashboardActivity').innerHTML=activityHTML(db.movements.slice().sort((a,b)=>b.date-a.date).slice(0,5));
+ const typeRows=[...new Set(db.stock.map(s=>s.typeId))].map(tid=>{let q=total(db.stock.filter(s=>s.typeId===tid));return `<tr><td><strong>${esc(typeName(tid))}</strong><br><span style="color:#778195;font-size:11px">${esc(typeCode(tid))}</span></td><td>${q.toLocaleString('es-ES')}</td><td>${badge(q)}</td></tr>`});
+ $('dashboardStock').innerHTML=table(['Tipo de palet','Unidades','Estado'],typeRows,'Añade stock para ver el resumen.');
+ fillSelects();renderStock();renderWarehouses();renderMovements();
+}
+function activityHTML(items){if(!items.length)return '<div class="empty-state">Todavía no hay movimientos registrados.</div>';return items.map(m=>`<div class="event"><div class="event-dot" style="background:${m.kind==='Salida'?'#d65c64':m.kind==='Entrada'?'#16845b':m.kind==='Traslado'?'#4675e8':'#b86a12'}"></div><div class="event-text"><strong>${esc(m.kind)}</strong> · ${esc(typeName(m.typeId))}<br>${m.kind==='Traslado'?`${esc(whName(m.fromId))} → ${esc(whName(m.toId))}`:`${esc(whName(m.warehouseId))} · ${m.kind==='Salida'?'-':'+'}${Number(m.qty).toLocaleString('es-ES')} palets`}<small>${new Date(m.date).toLocaleString('es-ES')} ${m.note?'· '+esc(m.note):''}</small></div></div>`).join('')}
+function fillSelects(){
+ const options=db.warehouses.map(w=>`<option value="${esc(w.id)}">${esc(w.name)}</option>`).join('');
+ const types=db.types.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');
+ const whf=$('stockWarehouseFilter'),tf=$('stockTypeFilter');let oldw=whf.value,oldt=tf.value;
+ whf.innerHTML='<option value="">Todas las naves</option>'+options;tf.innerHTML='<option value="">Todos los tipos</option>'+types;whf.value=oldw;tf.value=oldt;
+}
+function renderStock(){
+ const search=($('stockSearch')?.value||'').toLowerCase(), wh=$('stockWarehouseFilter')?.value||'', typ=$('stockTypeFilter')?.value||'';
+ let rows=db.stock.filter(s=>(!wh||s.warehouseId===wh)&&(!typ||s.typeId===typ)&&[typeName(s.typeId),typeCode(s.typeId),whName(s.warehouseId),s.notes].join(' ').toLowerCase().includes(search)).map(s=>`<tr><td><strong>${esc(typeName(s.typeId))}</strong><br><span style="color:#778195;font-size:11px">${esc(typeCode(s.typeId))}</span></td><td>${esc(whName(s.warehouseId))}</td><td><strong>${Number(s.qty).toLocaleString('es-ES')}</strong></td><td>${badge(Number(s.qty))}</td><td>${esc(s.notes||'—')}</td><td><button class="secondary small" onclick="editStock('${s.id}')">Editar</button> <button class="danger small" onclick="deleteStock('${s.id}')">Borrar</button></td></tr>`);
+ $('stockTable').innerHTML=table(['Tipo / código','Nave','Cantidad','Estado','Notas','Acciones'],rows,'No hay stock que coincida con la búsqueda.');
+}
+function renderWarehouses(){
+ $('warehouseCountLabel').textContent=`${db.warehouses.length} ubicaciones`;
+ let rows=db.warehouses.map(w=>{let q=total(db.stock.filter(s=>s.warehouseId===w.id));return `<tr><td><strong>${esc(w.name)}</strong></td><td>${esc(w.code||'—')}</td><td>${esc(w.location||'—')}</td><td>${q.toLocaleString('es-ES')}</td><td>${w.capacity? q.toLocaleString('es-ES')+' / '+Number(w.capacity).toLocaleString('es-ES'):'No definida'}</td><td><button class="secondary small" onclick="editWarehouse('${w.id}')">Editar</button> <button class="danger small" onclick="deleteWarehouse('${w.id}')">Borrar</button></td></tr>`});
+ $('warehouseTable').innerHTML=table(['Nombre','Código','Ubicación','Stock actual','Capacidad','Acciones'],rows,'Aún no hay naves registradas.');
+}
+function renderMovements(){
+ const q=($('movementSearch')?.value||'').toLowerCase(),kind=$('movementKindFilter')?.value||'';
+ let rows=db.movements.slice().sort((a,b)=>b.date-a.date).filter(m=>(!kind||m.kind===kind)&&[m.kind,typeName(m.typeId),whName(m.warehouseId),whName(m.fromId),whName(m.toId),m.note].join(' ').toLowerCase().includes(q)).map(m=>`<tr><td>${new Date(m.date).toLocaleString('es-ES')}</td><td><strong>${esc(m.kind)}</strong></td><td>${esc(typeName(m.typeId))}</td><td>${m.kind==='Traslado'?`${esc(whName(m.fromId))} → ${esc(whName(m.toId))}`:esc(whName(m.warehouseId))}</td><td>${Number(m.qty).toLocaleString('es-ES')}</td><td>${esc(m.note||'—')}</td></tr>`);
+ $('movementTable').innerHTML=table(['Fecha','Tipo','Referencia','Nave / recorrido','Cantidad','Notas'],rows,'No hay movimientos registrados.');
+}
+function field(name,label,type='text',value='',opts=null,required=false,full=false,placeholder=''){
+ let control=type==='select'?`<select class="field" name="${name}" ${required?'required':''}>${(opts||[]).map(o=>`<option value="${esc(o.value)}" ${String(o.value)===String(value)?'selected':''}>${esc(o.label)}</option>`).join('')}</select>`:type==='textarea'?`<textarea class="field" name="${name}" rows="3" placeholder="${esc(placeholder)}">${esc(value)}</textarea>`:`<input class="field" name="${name}" type="${type}" value="${esc(value)}" placeholder="${esc(placeholder)}" ${required?'required':''} ${type==='number'?'min="0" step="1"':''}>`;
+ return `<div class="form-row ${full?'full':''}"><label>${label}${required?' *':''}</label>${control}</div>`;
+}
+function openModal(title,desc,fields,action,submit='Guardar'){
+ $('modalTitle').textContent=title;$('modalDescription').textContent=desc;$('modalFields').innerHTML=fields.join('');$('saveModal').textContent=submit;modalAction=action;$('modalBackdrop').classList.add('show');
+}
+function closeModal(){$('modalBackdrop').classList.remove('show');modalAction=null}
+$('cancelModal').onclick=closeModal;$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal()});
+$('modalForm').onsubmit=e=>{e.preventDefault();if(!modalAction)return;const data=Object.fromEntries(new FormData(e.target).entries());const result=modalAction(data);if(result!==false){closeModal();save()}};
+function openWarehouse(w=null){openModal(w?'Editar nave':'Añadir nave','Identifica la nave o almacén.',[field('name','Nombre de la nave','text',w?.name||'',null,true),field('code','Código','text',w?.code||'',null,false),field('location','Dirección / ubicación','text',w?.location||'',null,false,true),field('capacity','Capacidad máxima (palets)','number',w?.capacity||0,null,false)],d=>{if(w)Object.assign(w,{name:d.name,code:d.code,location:d.location,capacity:Number(d.capacity)||0});else db.warehouses.push({id:uid('wh'),name:d.name,code:d.code,location:d.location,capacity:Number(d.capacity)||0});toast(w?'Nave actualizada':'Nave creada')})}
+function editWarehouse(id){let w=db.warehouses.find(x=>x.id===id);if(w)openWarehouse(w)}
+function deleteWarehouse(id){if(db.stock.some(s=>s.warehouseId===id)||db.movements.some(m=>m.warehouseId===id||m.fromId===id||m.toId===id)){alert('No se puede borrar esta nave porque tiene stock o movimientos asociados. Traslada o elimina esos registros primero.');return}if(confirm('¿Borrar esta nave?')){db.warehouses=db.warehouses.filter(w=>w.id!==id);save();toast('Nave eliminada')}}
+function openStock(s=null){
+ const whOpts=db.warehouses.map(w=>({value:w.id,label:w.name})),typeOpts=db.types.map(t=>({value:t.id,label:`${t.name} (${t.code})`}));
+ if(!whOpts.length){toast('Primero crea una nave.');return}
+ if(!typeOpts.length){const name=prompt('Nombre del nuevo tipo de palet:');if(!name)return;db.types.push({id:uid('t'),name,code:'PAL-'+(db.types.length+1),description:''})}
+ const types=db.types.map(t=>({value:t.id,label:`${t.name} (${t.code})`}));
+ openModal(s?'Editar stock':'Añadir stock','Indica la nave, la referencia y las unidades disponibles.',[field('warehouseId','Nave','select',s?.warehouseId||whOpts[0].value,whOpts,true),field('typeId','Tipo de palet','select',s?.typeId||types[0].value,types,true),field('qty','Cantidad (unidades)','number',s?.qty??0,null,true),field('notes','Notas','text',s?.notes||'',null,false,true)],d=>{let qty=Number(d.qty);if(!Number.isInteger(qty)||qty<0){alert('La cantidad debe ser un número entero igual o superior a cero.');return false}if(s){Object.assign(s,{warehouseId:d.warehouseId,typeId:d.typeId,qty,notes:d.notes})}else{let existing=db.stock.find(x=>x.warehouseId===d.warehouseId&&x.typeId===d.typeId);if(existing){existing.qty+=qty;if(d.notes)existing.notes=d.notes}else db.stock.push({id:uid('s'),warehouseId:d.warehouseId,typeId:d.typeId,qty,notes:d.notes})}toast(s?'Stock actualizado':'Stock añadido')})
+}
+function editStock(id){let s=db.stock.find(x=>x.id===id);if(s)openStock(s)}
+function deleteStock(id){if(confirm('¿Eliminar este registro de stock? El historial de movimientos se conservará.')){db.stock=db.stock.filter(s=>s.id!==id);save();toast('Registro eliminado')}}
+function openMovement(){
+ if(!db.warehouses.length||!db.types.length){toast('Necesitas al menos una nave y un tipo de palet.');return}
+ const whOpts=db.warehouses.map(w=>({value:w.id,label:w.name})),typeOpts=db.types.map(t=>({value:t.id,label:`${t.name} (${t.code})`}));
+ openModal('Registrar movimiento','Las salidas y traslados no permitirán retirar más unidades de las disponibles.',[
+ field('kind','Tipo de movimiento','select','Entrada',[{value:'Entrada',label:'Entrada (aumentar stock)'},{value:'Salida',label:'Salida (reducir stock)'},{value:'Traslado',label:'Traslado entre naves'},{value:'Ajuste',label:'Ajuste de inventario'}],true),
+ field('typeId','Tipo de palet','select',typeOpts[0].value,typeOpts,true),
+ field('warehouseId','Nave','select',whOpts[0].value,whOpts,true),
+ field('toId','Nave de destino (solo traslado)','select',whOpts.length>1?whOpts[1].value:whOpts[0].value,whOpts,false),
+ field('qty','Cantidad','number',1,null,true),
+ field('note','Nota / albarán','text','',null,false,true,'Ej. proveedor, cliente o número de albarán')
+ ],d=>{
+ let qty=Number(d.qty);if(!Number.isInteger(qty)||qty<=0){alert('La cantidad debe ser un número entero mayor que cero.');return false}
+ const find=(wid)=>db.stock.find(s=>s.warehouseId===wid&&s.typeId===d.typeId);
+ let src=find(d.warehouseId);
+ if(d.kind==='Entrada'){if(src)src.qty+=qty;else db.stock.push({id:uid('s'),warehouseId:d.warehouseId,typeId:d.typeId,qty,notes:''})}
+ else if(d.kind==='Salida'||d.kind==='Ajuste'){if(!src||src.qty<qty){alert(`Stock insuficiente en ${whName(d.warehouseId)}. Disponible: ${src?.qty||0}.`);return false}src.qty-=qty}
+ else if(d.kind==='Traslado'){if(d.toId===d.warehouseId){alert('Elige una nave de destino diferente.');return false}if(!src||src.qty<qty){alert(`Stock insuficiente en ${whName(d.warehouseId)}. Disponible: ${src?.qty||0}.`);return false}src.qty-=qty;let dest=find(d.toId);if(dest)dest.qty+=qty;else db.stock.push({id:uid('s'),warehouseId:d.toId,typeId:d.typeId,qty,notes:''})}
+ db.movements.push({id:uid('m'),kind:d.kind,typeId:d.typeId,warehouseId:d.warehouseId,fromId:d.kind==='Traslado'?d.warehouseId:'',toId:d.kind==='Traslado'?d.toId:'',qty,note:d.note,date:Date.now()});toast('Movimiento registrado correctamente')
+ })
+}
+function exportCSV(){
+ const rows=[['Nave','Código nave','Tipo de palet','Código palet','Cantidad','Notas']];
+ db.stock.forEach(s=>{const w=db.warehouses.find(x=>x.id===s.warehouseId)||{},t=db.types.find(x=>x.id===s.typeId)||{};rows.push([w.name||'',w.code||'',t.name||'',t.code||'',s.qty,s.notes||''])});
+ const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='inventario-palets.csv';a.click();URL.revokeObjectURL(url);toast('Inventario exportado a CSV')
+}
+$('addWarehouse').onclick=()=>openWarehouse();$('addStock').onclick=()=>openStock();$('addMovement').onclick=openMovement;$('quickMovement').onclick=openMovement;$('exportBtn').onclick=exportCSV;$('stockExport').onclick=exportCSV;
+['stockSearch','stockWarehouseFilter','stockTypeFilter'].forEach(id=>$(id).addEventListener('input',renderStock));
+['movementSearch','movementKindFilter'].forEach(id=>$(id).addEventListener('input',renderMovements));
+render();
+</script>
+</body>
+</html>
